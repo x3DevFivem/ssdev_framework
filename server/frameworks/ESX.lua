@@ -1,6 +1,7 @@
-if(FrameworkLoader:IsFrameworkLoaded("es_extended")) then return end
+if(not FrameworkLoader:IsFrameworkLoaded("es_extended")) then return end
 
 ESX = FrameworkLoader:GetCoreObject()
+local oxInventoryLoaded = FrameworkLoader:IsFrameworkLoaded("ox_inventory")
 
 function Framework:RegisterServerCallback(name, cb)
     Logger:Debug("Framework.RegisterServerCallback: " .. name)
@@ -19,30 +20,32 @@ function Framework:NotifyPlayer(source, title, message, color, icon)
         )
 end
 
-function Framework:CheckInventoryForItem(source, item, amount)
-    amount = amount or 0
-    local xPlayer = ESX.GetPlayerFromId(source)
-    return xPlayer.getInventoryItem(item).count > amount
-end
+if(not oxInventoryLoaded) then
+    function Framework:CheckInventoryForItem(source, item, amount)
+        amount = amount or 0
+        local xPlayer = ESX.GetPlayerFromId(source)
+        return xPlayer.getInventoryItem(item).count > amount
+    end
 
-function Framework:RemoveItemFromInventory(source, item, amount)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    xPlayer.removeInventoryItem(item, amount)
-end
+    function Framework:RemoveItemFromInventory(source, item, amount)
+        local xPlayer = ESX.GetPlayerFromId(source)
+        xPlayer.removeInventoryItem(item, amount)
+    end
 
-function Framework:AddItemToInventory(source, item, amount)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    xPlayer.addInventoryItem(item, amount)
-end
+    function Framework:AddItemToInventory(source, item, amount)
+        local xPlayer = ESX.GetPlayerFromId(source)
+        xPlayer.addInventoryItem(item, amount)
+    end
 
-function Framework:CanCarryItem(source, item, amount)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    return xPlayer.canCarryItem(item, amount)
-end
+    function Framework:CanCarryItem(source, item, amount)
+        local xPlayer = ESX.GetPlayerFromId(source)
+        return xPlayer.canCarryItem(item, amount)
+    end
 
-function Framework:GetItemInventoryInfo(source, item)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    return xPlayer.getInventoryItem(item)
+    function Framework:GetItemInventoryInfo(source, item)
+        local xPlayer = ESX.GetPlayerFromId(source)
+        return xPlayer.getInventoryItem(item)
+    end
 end
 
 function Framework:AddMoney(source, account, amount, reason)

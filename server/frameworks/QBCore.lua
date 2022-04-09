@@ -1,4 +1,4 @@
-if(FrameworkLoader:IsFrameworkLoaded("qb-core")) then return end
+if(not FrameworkLoader:IsFrameworkLoaded("qb-core")) then return end
 
 QBCore = FrameworkLoader:GetCoreObject()
 

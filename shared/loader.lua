@@ -15,6 +15,13 @@ local predefinedFrameworks = {
             return exports['qb-core']:GetCoreObject()
         end,
         State = "missing",
+    },
+    ["ox_inventory"] = {
+        CoreObjectName = "OxInventory",
+        CoreObjectFunc = function()
+            return exports.ox_inventory
+        end,
+        State = "missing",
     }
 }
 
@@ -65,7 +72,7 @@ function FrameworkLoader:GetActiveFramework()
 end
 
 function FrameworkLoader:IsFrameworkLoaded(framework)
-    return not loadedFrameworks[framework]
+    return loadedFrameworks[framework]
 end
 
 function FrameworkLoader:GetCoreObject(framework)

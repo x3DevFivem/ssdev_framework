@@ -1,4 +1,4 @@
-if(FrameworkLoader:IsFrameworkLoaded("es_extended")) then return end
+if(not FrameworkLoader:IsFrameworkLoaded("es_extended")) then return end
 
 ESX = FrameworkLoader:GetCoreObject()
 
