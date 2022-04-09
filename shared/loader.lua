@@ -7,6 +7,7 @@ local predefinedFrameworks = {
         CoreObjectFunc = function()
             return exports['es_extended']:getSharedObject()
         end,
+        FrameworkType = 'main',
         State = "missing"
     },
     ["qb-core"] = {
@@ -14,6 +15,7 @@ local predefinedFrameworks = {
         CoreObjectFunc = function()
             return exports['qb-core']:GetCoreObject()
         end,
+        FrameworkType = 'main',
         State = "missing",
     },
     ["ox_inventory"] = {
@@ -21,6 +23,7 @@ local predefinedFrameworks = {
         CoreObjectFunc = function()
             return exports.ox_inventory
         end,
+        FrameworkType = 'inventory',
         State = "missing",
     }
 }
@@ -55,15 +58,10 @@ function FrameworkLoader:LoadFramework(resourceName)
     return true
 end
 
-local activeFramework = ''
-function FrameworkLoader:GetActiveFramework()
-    if(activeFramework ~= '') then
-        return activeFramework
-    end
-
+function FrameworkLoader:GetActiveFramework(type)
+    type = type or 'main'
     for key, value in pairs(predefinedFrameworks) do
-        if(value.State == 'exists') then
-            activeFramework = key
+        if(value.State == 'exists' and value.FrameworkType == type) then
             return key
         end
     end
