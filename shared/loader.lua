@@ -55,7 +55,6 @@ function FrameworkLoader:LoadFramework(resourceName)
     Logger:Info("'^4" .. resourceName .. "^7' loaded into SSDev_Framework")
 
     loadedFrameworks[resourceName] = true
-    Logger:Debug("LOADED " .. resourceName)
     return true
 end
 
