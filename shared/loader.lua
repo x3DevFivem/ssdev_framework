@@ -35,6 +35,7 @@ function FrameworkLoader:LoadDefaults()
         if(resourceState == 'missing') then
             Logger:Warning("FrameworkLoader:LoadDefaults: " .. key .. " is not found. Skipping...")
         else
+            Logger:Info("FrameworkLoader:LoadDefaults: " .. key .. " is found. Loading framework...")
             FrameworkLoader:LoadFramework(key)
         end
     end
