@@ -2,8 +2,8 @@ if(not FrameworkLoader:IsFrameworkLoaded("es_extended")) then return end
 
 ESX = FrameworkLoader:GetCoreObject()
 
-function Framework:TriggerServerCallback(name, cb)
-    ESX.TriggerServerCallback(name, cb)
+function Framework:TriggerServerCallback(name, cb, ...)
+    ESX.TriggerServerCallback(name, cb, ...)
 end
 
 function Framework:NotifyPlayer(title, message, color, icon)

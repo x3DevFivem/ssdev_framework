@@ -60,7 +60,7 @@ end
 
 function Framework:GetAmountOfMoney(source, account)
     local xPlayer = ESX.GetPlayerFromId(source)
-    return xPlayer.getAccount(Config.PayinCurrency).money
+    return xPlayer.getAccount(account).money
 end
 
 -- Return identifier, player name
