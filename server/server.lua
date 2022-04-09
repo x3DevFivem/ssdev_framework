@@ -1,0 +1,2 @@
+Framework = {}
+FrameworkLoader:LoadDefaults()
