@@ -33,7 +33,7 @@ end
 function FrameworkLoader:LoadFramework(resourceName)
     local resourceExists = GetResourceState(resourceName) ~= 'missing'
     if(not resourceExists) then
-        Logger:Warning("rameworkLoader:LoadFramework: " .. resourceName .. " not found. Skipping...")
+        Logger:Warning("FrameworkLoader:LoadFramework: " .. resourceName .. " not found. Skipping...")
         return false
     end
 

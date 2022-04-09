@@ -1,7 +1,5 @@
 if(FrameworkLoader:IsFrameworkLoaded("es_extended")) then return end
 
-Framework.RegisterServerCallback = ESX.RegisterServerCallback
-
 ESX = FrameworkLoader:GetCoreObject()
 
 function Framework:RegisterServerCallback(name, cb)
