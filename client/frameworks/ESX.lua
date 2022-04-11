@@ -7,5 +7,5 @@ function Framework:TriggerServerCallback(name, cb, ...)
 end
 
 function Framework:NotifyPlayer(title, message, color, icon)
-    ESX.ShowAdvancedNotification(title, message, icon, color, 3)
+    ESX.ShowAdvancedNotification(title, '', message, icon, color, 3)
 end
