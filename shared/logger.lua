@@ -8,7 +8,7 @@ local loggingLevels = {
 
 Logger = {
     Prefix = '[' .. GetCurrentResourceName() .. '] ',
-    Level = 2
+    Level = 3
 }
 
 function Logger:Info(message)

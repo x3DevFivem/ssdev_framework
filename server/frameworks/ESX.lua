@@ -47,6 +47,10 @@ if(not oxInventoryLoaded) then
         local xPlayer = ESX.GetPlayerFromId(source)
         return xPlayer.getInventoryItem(item)
     end
+
+    function Framework:GetAmountOfItemInInventory(source, item)
+        return Framework:GetItemInventoryInfo(source, item).amount
+    end
 end
 
 function Framework:AddMoney(source, account, amount, reason)

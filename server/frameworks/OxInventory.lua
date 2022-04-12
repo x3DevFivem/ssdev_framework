@@ -22,3 +22,7 @@ end
 function Framework:GetItemInventoryInfo(source, item)
     return oxInventory:GetItem(source, item, nil, false)
 end
+
+function Framework:GetAmountOfItemInInventory(source, item)
+    return oxInventory:Search(source, "count", item)
+end

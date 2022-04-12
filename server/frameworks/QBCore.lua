@@ -3,6 +3,7 @@ if(not FrameworkLoader:IsFrameworkLoaded("qb-core")) then return end
 QBCore = FrameworkLoader:GetCoreObject()
 
 function Framework:RegisterServerCallback(name, cb)
+    Logger:Debug("Framework.RegisterServerCallback: " .. name)
     QBCore.Functions.CreateCallback(name, cb)
 end
 
@@ -12,8 +13,7 @@ end
 
 function Framework:CheckInventoryForItem(source, item, amount)
     amount = amount or 0
-    local player = QBCore.Functions.GetPlayer(source)
-    return player.Functions.GetItemByName(item) >= amount
+    return Framework:GetAmountOfItemInInventory(source, amount) >= amount
 end
 
 function Framework:RemoveItemFromInventory(source, item, amount)
@@ -30,9 +30,27 @@ function Framework:CanCarryItem(source, item, amount)
     return true -- Can carry is handled on QBCore Side when running AddItem
 end
 
+function Framework:GetAmountOfItemInInventory(source, item)
+    local player = QBCore.Functions.GetPlayer(source)
+    local itemsByName = player.Functions.GetItemsByName(item)
+    local amount = 0
+
+    for index, value in ipairs(itemsByName) do
+        amount = amount + value.amount
+    end
+
+    return amount
+end
+
 function Framework:GetItemInventoryInfo(source, item)
     local player = QBCore.Functions.GetPlayer(source)
-    return player.Functions.GetItemByName(item)
+    local itemByName = player.Functions.GetItemByName(item)
+
+    return {
+        name = item,
+        label = itemByName.label or '',
+        amount = itemByName.amount or 0
+    }
 end
 
 function Framework:AddMoney(source, account, amount, reason)
