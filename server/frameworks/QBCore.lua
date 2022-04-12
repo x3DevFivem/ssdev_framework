@@ -3,17 +3,17 @@ if(not FrameworkLoader:IsFrameworkLoaded("qb-core")) then return end
 QBCore = FrameworkLoader:GetCoreObject()
 
 function Framework:RegisterServerCallback(name, cb)
-    Logger:Debug("[ssdev] Framework.RegisterServerCallback: " .. name)
     QBCore.Functions.CreateCallback(name, cb)
 end
 
 function Framework:NotifyPlayer(source, title, message, color, icon)
-    TriggerClientEvent("QBCore:Notify", source, message, (color == "green" and "success" or "error"))
+    TriggerClientEvent("QBCore:Notify", source, title .. ": " .. message, (color == "green" and "success" or "error"))
 end
 
-function Framework:CheckInventoryForItem(source, item)
+function Framework:CheckInventoryForItem(source, item, amount)
+    amount = amount or 0
     local player = QBCore.Functions.GetPlayer(source)
-    return player.Functions.HasItem(item)
+    return player.Functions.GetItemByName(item) >= amount
 end
 
 function Framework:RemoveItemFromInventory(source, item, amount)
@@ -27,8 +27,7 @@ function Framework:AddItemToInventory(source, item, amount)
 end
 
 function Framework:CanCarryItem(source, item, amount)
-    Logger:Warning("Framework:CanCarryItem is not implemented yet!")
-    return false
+    return true -- Can carry is handled on QBCore Side when running AddItem
 end
 
 function Framework:GetItemInventoryInfo(source, item)

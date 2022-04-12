@@ -13,6 +13,7 @@ function Framework:NotifyPlayer(source, title, message, color, icon)
             "esx:showAdvancedNotification",
             source,
             title,
+            '',
             message,
             icon,
             color,
