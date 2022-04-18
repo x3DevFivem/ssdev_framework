@@ -7,44 +7,47 @@ local loggingLevels = {
 }
 
 Logger = {
-    Prefix = '[' .. GetCurrentResourceName() .. '] ',
-    Level = 3
+    Create = function(prefix, level)
+        local self = {
+            Prefix = '[' .. prefix .. '] ',
+            Level = level
+        }
+
+        function self:Info(message)
+            if(self.Level >= 2) then
+                print(self.Prefix .. loggingLevels[2] .. ": " .. message)
+            end
+        end
+
+        function self:Debug(message)
+            if(self.Level >= 3) then
+                print(self.Prefix .. loggingLevels[3] .. ": " .. message)
+            end
+        end
+
+        function self:Error(message)
+            if(self.Level >= 0) then
+                print(self.Prefix .. loggingLevels[0] .. ": " .. message)
+            end
+        end
+
+        function self:Warning(message)
+            if(self.Level >= 1) then
+                print(self.Prefix .. loggingLevels[1] .. ": " .. message)
+            end
+        end
+
+        function self:Trace(message)
+            if(self.Level >= 4) then
+                print(self.Prefix .. loggingLevels[4] .. ": " .. message)
+            end
+        end
+
+        return self
+    end
 }
 
-function Logger:Info(message)
-    if(Logger.Level >= 2) then
-        print(Logger.Prefix .. loggingLevels[2] .. ": " .. message)
-    end
-end
-
-function Logger:Debug(message)
-    if(Logger.Level >= 3) then
-        print(Logger.Prefix .. loggingLevels[3] .. ": " .. message)
-    end
-end
-
-function Logger:Error(message)
-    if(Logger.Level >= 0) then
-        print(Logger.Prefix .. loggingLevels[0] .. ": " .. message)
-    end
-end
-
-function Logger:Warning(message)
-    if(Logger.Level >= 1) then
-        print(Logger.Prefix .. loggingLevels[1] .. ": " .. message)
-    end
-end
-
-function Logger:Trace(message)
-    if(Logger.Level >= 4) then
-        print(Logger.Prefix .. loggingLevels[4] .. ": " .. message)
-    end
-end
-
 exports("GetLogger", function (prefix, level)
-    local logger = Logger
-    logger.Prefix = (prefix or Logger.Prefix) .. ' '
-    logger.Level = level or Logger.level
-
+    local logger = Logger.Create(prefix, level)
     return logger
 end)

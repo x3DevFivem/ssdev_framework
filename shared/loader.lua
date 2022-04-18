@@ -1,3 +1,4 @@
+FrameworkLogger = Logger.Create(GetCurrentResourceName(), 2)
 local loadedFrameworks = {}
 FrameworkLoader = {}
 
@@ -33,9 +34,9 @@ function FrameworkLoader:LoadDefaults()
         local resourceState = GetResourceState(key)
         predefinedFrameworks[key].State = resourceState == 'started' and 'exists' or 'missing'
         if(resourceState == 'missing') then
-            Logger:Warning("FrameworkLoader:LoadDefaults: " .. key .. " is not found. Skipping...")
+            FrameworkLogger:Warning("FrameworkLoader:LoadDefaults: " .. key .. " is not found. Skipping...")
         else
-            Logger:Info("FrameworkLoader:LoadDefaults: " .. key .. " is found. Loading framework...")
+            FrameworkLogger:Info("FrameworkLoader:LoadDefaults: " .. key .. " is found. Loading framework...")
             FrameworkLoader:LoadFramework(key)
         end
     end
@@ -44,15 +45,15 @@ end
 function FrameworkLoader:LoadFramework(resourceName)
     local resourceExists = GetResourceState(resourceName) ~= 'missing'
     if(not resourceExists) then
-        Logger:Warning("FrameworkLoader:LoadFramework: " .. resourceName .. " not found. Skipping...")
+        FrameworkLogger:Warning("FrameworkLoader:LoadFramework: " .. resourceName .. " not found. Skipping...")
         return false
     end
 
-    Logger:Info("Loading '^4" .. resourceName .. "^7' Framework into SSDev_Framework")
+    FrameworkLogger:Info("Loading '^4" .. resourceName .. "^7' Framework into SSDev_Framework")
 
     Framework[resourceName] = {}
 
-    Logger:Info("'^4" .. resourceName .. "^7' loaded into SSDev_Framework")
+    FrameworkLogger:Info("'^4" .. resourceName .. "^7' loaded into SSDev_Framework")
 
     loadedFrameworks[resourceName] = true
     return true

@@ -4,7 +4,7 @@ ESX = FrameworkLoader:GetCoreObject()
 local oxInventoryLoaded = FrameworkLoader:IsFrameworkLoaded("ox_inventory")
 
 function Framework:RegisterServerCallback(name, cb)
-    Logger:Debug("Framework.RegisterServerCallback: " .. name)
+    FrameworkLogger:Debug("Framework.RegisterServerCallback: " .. name)
     ESX.RegisterServerCallback(name, cb)
 end
 

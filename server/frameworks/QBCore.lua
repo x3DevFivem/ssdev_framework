@@ -3,7 +3,7 @@ if(not FrameworkLoader:IsFrameworkLoaded("qb-core")) then return end
 QBCore = FrameworkLoader:GetCoreObject()
 
 function Framework:RegisterServerCallback(name, cb)
-    Logger:Debug("Framework.RegisterServerCallback: " .. name)
+    FrameworkLogger:Debug("Framework.RegisterServerCallback: " .. name)
     QBCore.Functions.CreateCallback(name, cb)
 end
 
@@ -13,7 +13,7 @@ end
 
 function Framework:CheckInventoryForItem(source, item, amount)
     amount = amount or 0
-    return Framework:GetAmountOfItemInInventory(source, amount) >= amount
+    return Framework:GetAmountOfItemInInventory(source, item) >= amount
 end
 
 function Framework:RemoveItemFromInventory(source, item, amount)
