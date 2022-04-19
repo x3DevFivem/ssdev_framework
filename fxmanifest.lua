@@ -7,7 +7,10 @@ version '1.0.0'
 
 lua54 'yes'
 
-shared_script "shared/logger.lua"
+shared_script {
+    "config.lua",
+    "shared/logger.lua",
+}
 
 client_scripts {
     "shared/loader.lua",
