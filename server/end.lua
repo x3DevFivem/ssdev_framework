@@ -26,8 +26,9 @@ local function CheckForUpdates(resource)
                 local latestVersion = result.missingUpdates[#result.missingUpdates]
                 FrameworkLogger:Warning("Latest version: " .. latestVersion.version)
                 FrameworkLogger:Warning(resource .. " has an update available to: " .. latestVersion.version .. "!")
+                FrameworkLogger:Warning("|------------------------------| " .. resource .. " Update Notes" .. " |------------------------------|")
                 FrameworkLogger:Warning(result.combinedUpdateMessage)
-                FrameworkLogger:Warning("----------------------------------------------------")
+                FrameworkLogger:Warning("|------------------------------------------------------------------------------------------|")
             else
                 FrameworkLogger:Info(resource .. " is up to date!")
             end
