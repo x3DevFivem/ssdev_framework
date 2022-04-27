@@ -17,13 +17,13 @@ local function CheckForUpdates(resource)
 
     local version = GetResourceMetadata(resource, "version")
     local url = Config.UpdateChecking.UpdateServer .. "/api/Resource/" .. resource .. "/CheckForUpdate?myVersion=" .. version
-
     PerformHttpRequest(url, function (errorCode, resultData, resultHeaders)
         FrameworkLogger:Info("[Update Checker] Resource: " .. resource)
         if(resultData) then
             local result = json.decode(resultData).data
             if(result.needsUpdate) then
                 local latestVersion = result.missingUpdates[#result.missingUpdates]
+                FrameworkLogger:Warning("Current version: " .. version)
                 FrameworkLogger:Warning("Latest version: " .. latestVersion.version)
                 FrameworkLogger:Warning(resource .. " has an update available to: " .. latestVersion.version .. "!")
                 FrameworkLogger:Warning("|------------------------------| " .. resource .. " Update Notes" .. " |------------------------------|")
