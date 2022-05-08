@@ -4,7 +4,7 @@ local oxInventory = FrameworkLoader:GetCoreObject("ox_inventory")
 
 function Framework:CheckInventoryForItem(source, item, amount)
     amount = amount or 0
-    return oxInventory:Search(source, "count", item) > amount
+    return oxInventory:Search(source, "count", item) >= amount
 end
 
 function Framework:RemoveItemFromInventory(source, item, amount)
