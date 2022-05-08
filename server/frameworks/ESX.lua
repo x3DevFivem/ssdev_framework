@@ -25,7 +25,7 @@ if(not oxInventoryLoaded) then
     function Framework:CheckInventoryForItem(source, item, amount)
         amount = amount or 0
         local xPlayer = ESX.GetPlayerFromId(source)
-        return xPlayer.getInventoryItem(item).count > amount
+        return xPlayer.getInventoryItem(item).count >= amount
     end
 
     function Framework:RemoveItemFromInventory(source, item, amount)
